@@ -5,19 +5,21 @@
 | Column  | Type  | Options  |
 |---|---|---|---|---|---|
 | email  | string  | null: false  |  
-| name  | string  | 
+| name  | string  | null: false, index: true|
 
 ### Association
-- belongs_to :group
-- has_many :tweets
+- has_many :groups, through: :members
+- has_many :members
+- has_many :messages
 
 ## messagesテーブル
 
 | Column  | Type  | Options  |
 |---|---|---|---|---|
 | user_id | integer |null: false, foregin_key: true   |  
+| group_id | integer |null: false, foregin_key: true  |
 |  text  |  string |
-| image | text  |    
+| image | string  |    
 
 ### Association
 - belongs_to :user
@@ -33,17 +35,6 @@
 ### Association
 - belongs_to :group
 - belongs_to :user
-
-## groups
-
-| Column  | Type  | Options  |
-|---|---|---|---|---|
-| tweet_id  | integer  |
-| user_id  | integer  |
-
-### Association
-- has_many :tweets
-- has_many :user
 
 
 
