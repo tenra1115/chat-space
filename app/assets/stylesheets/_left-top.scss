@@ -20,9 +20,14 @@ float: left;
   }
 
   li {
+    color: white;
     display: list-item;
     font-weight: 700px;
     float: left;
     margin-left: 5px;
+
+    i {
+      color: white;
+    }
   }
 }
