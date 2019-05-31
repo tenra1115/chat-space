@@ -1,7 +1,4 @@
-
-
 .wrapper
-
   .left-content
     .top-content
       %p.user-name tenra
@@ -9,20 +6,15 @@
         %li.edit-user
           = link_to "#" do
             = fa_icon "edit" 
-              
         %li.new-group
           = link_to "#" do
             =fa_icon "cog" 
-
     .middle-content
       %a{href: "#"}
         .group
           %p.group-name ski
           %p.latest-message yo
-
-
   .right-content
-
     .top-content
       .current-group
         %h2.group-name ski
@@ -30,22 +22,17 @@
           %li.member-list-name tenra
       %a{href: "#"}
         .edit-btn Edit
-
-
     .middle-content
       #message_id.message
         .upper-info
           %p.upper-info__user tenra 
           %p.upper-info__date 2000/11/15  
         %p.message_text p
-
-
     .bottom-content
       .message-box 
         .message-box__left
           %p.message-text__make  こんにちわ 
           %span= fa_icon "image"
-          
         .message-box__right
           .message-button__submit
             %p.submit Send
