@@ -3,7 +3,7 @@
     box-sizing: border-box;
     display: block;
     padding-bottom: 40px;
-    
+
       .upper-info__user {
         font-size: 16px;
         font-weight: bold;
@@ -17,7 +17,7 @@
         margin-left: 10px;
         vertical-align: top; 
       }
-    .message_text {
+    &_text {
       font-size: 14px;
       color: #434a54;
     }
