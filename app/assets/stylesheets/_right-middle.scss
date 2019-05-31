@@ -1,0 +1,27 @@
+
+  .message {
+    box-sizing: border-box;
+    display: block;
+    padding-bottom: 40px;
+
+    .upper-info {
+    }
+      .upper-info__user {
+        font-size: 16px;
+        font-weight: bold;
+        color: #434a54;
+        display: inline-block;
+      }
+
+      .upper-info__date {
+        font-size: 12px;
+        display: inline-block;
+        margin-left: 10px;
+        vertical-align: top; 
+      }
+    .message_text {
+      font-size: 14px;
+      color: #434a54;
+    }
+
+  }

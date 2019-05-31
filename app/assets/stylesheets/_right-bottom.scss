@@ -1,0 +1,60 @@
+.bottom-content {
+  background-color: lightgray;
+  box-sizing: border-box;
+  display: block;
+  height: 90px;
+  width: 100%;
+  position: relative;
+
+  .message-box {
+    box-sizing: border-box;
+    position: absolute;
+    top: 20px;
+    bottom: 20px;
+    width: calc(100% - 40px);
+    left: 40px;
+
+
+    .message-box__left {
+      box-sizing: border-box;
+      height: 50px;
+      width: calc(100% - 150px);
+      float: left;
+      left: 0px;
+      background-color: white;
+      position: relative;
+
+      p{
+        font-size: 16px;
+        color: #434a54;
+        line-height: 50px;
+        padding-left: 10px;
+      }
+
+      span{
+        display: inline;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+      
+
+    }
+  
+    .message-box__right {
+      background-color: #38aefd;
+      display: inline-block;
+      margin-left: 15px;
+
+      .message-button__submit {
+        padding: 15px 30px;
+
+        p{
+          color: white;
+        }
+      }
+    }
+  }
+}  
+
+
