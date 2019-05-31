@@ -1,0 +1,28 @@
+.user-name {
+font-size: 16px;
+font-weight: bold;
+color: #ffffff;
+float: left;
+}
+
+.user-menu{
+  color: white;
+  display: flex;
+  font-weight: 700px;
+  float: right;
+  margin-left: 180px;
+  
+  .edit-user{
+   color: white;
+   display: list-item;
+   font-weight: 700px;
+   float: left;
+  }
+
+  li {
+    display: list-item;
+    font-weight: 700px;
+    float: left;
+    margin-left: 5px;
+  }
+}
