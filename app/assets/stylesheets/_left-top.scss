@@ -1,8 +1,13 @@
 .user-name {
-  font-size: 16px;
-  font-weight: bold;
-  color: #ffffff;
+  color: white;
   float: left;
+  width: calc(100% - 30px);
+  
+  a{
+    font-weight: bold;
+    font-size: 16px;
+    color: white;
+  }
 }
 
 .user-menu{
@@ -10,7 +15,6 @@
   display: flex;
   font-weight: 700px;
   float: right;
-  margin-left: 180px;
   
   .edit-user{
    color: white;

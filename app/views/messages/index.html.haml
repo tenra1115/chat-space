@@ -1,13 +1,14 @@
 .wrapper
   .left-content
     .top-content
-      %p.user-name tenra
+      %p.user-name 
+        = link_to current_user.name
       %ul.user-menu
         %li.edit-user
-          = link_to "#" do
+          = link_to "" do
             = fa_icon "edit" 
         %li.new-group
-          = link_to "#" do
+          = link_to "/users/:id/edit" do
             =fa_icon "cog" 
     .middle-content
       = link_to "#" do
@@ -25,7 +26,8 @@
     .middle-content
       #message_id.message
         .upper-info
-          %p.upper-info__user tenra 
+          %p.upper-info__user 
+            = link_to current_user.name 
           %p.upper-info__date 2000/11/15  
         %p.message_text p
     .bottom-content
