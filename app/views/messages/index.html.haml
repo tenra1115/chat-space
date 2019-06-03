@@ -5,23 +5,26 @@
         = link_to current_user.name
       %ul.user-menu
         %li.edit-user
-          = link_to "" do
+          = link_to "/groups/new" do
             = fa_icon "edit" 
         %li.new-group
           = link_to "/users/:id/edit" do
             =fa_icon "cog" 
     .middle-content
-      = link_to "#" do
-        .group
-          %p.group-name ski
-          %p.latest-message yo
+      -# = link_to "" do
+      .group
+        - current_user.groups.each do |group|
+          = link_to group_messages_path(group) do
+            %p.group-name 
+              = group.name
+            %p.latest-message yo
   .right-content
     .top-content
       .current-group
         %h2.group-name ski
         %ul.member-list 
           %li.member-list-name tenra
-      = link_to "#" do
+      = link_to "/groups/:id/edit" do
         .edit-btn Edit
     .middle-content
       #message_id.message
