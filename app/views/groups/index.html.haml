@@ -17,4 +17,5 @@
           = link_to group_messages_path(group) do
             %p.group-name 
               = group.name
-            %p.latest-message yo
+            %p.latest-message 
+              = group.show_last_content
