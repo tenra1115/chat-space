@@ -5,37 +5,51 @@
         = link_to current_user.name
       %ul.user-menu
         %li.edit-user
-          = link_to "" do
+          = link_to "/groups/new" do
             = fa_icon "edit" 
         %li.new-group
           = link_to "/users/:id/edit" do
             =fa_icon "cog" 
     .middle-content
-      = link_to "#" do
-        .group
-          %p.group-name ski
-          %p.latest-message yo
+      -# = link_to "" do
+      .group
+        - current_user.groups.each do |group|
+          = link_to group_messages_path(group) do
+            %p.group-name 
+              = group.name
+            %p.latest-message 
+              = group.show_last_content
+              
   .right-content
     .top-content
       .current-group
-        %h2.group-name ski
-        %ul.member-list 
-          %li.member-list-name tenra
-      = link_to "#" do
-        .edit-btn Edit
-    .middle-content
-      #message_id.message
-        .upper-info
-          %p.upper-info__user 
-            = link_to current_user.name 
-          %p.upper-info__date 2000/11/15  
-        %p.message_text p
-    .bottom-content
-      .message-box 
-        .message-box__left
-          %p.message-text__make  こんにちわ 
-          %span= fa_icon "image"
-        .message-box__right
-          .message-button__submit
-            %p.submit Send
+        %h2.group-name 
+          = @group.name
+          %ul.member-list 
+            .member-list-name 
+            Menber :
+            - @messe.each do |user|
+              = user.name
 
+      = link_to "/groups/:id/edit" do
+        .edit-btn Edit
+    .middle-content  
+      - @messages.each do |message|
+        #message_id.message
+          .upper-info
+            %p.upper-info__user 
+              = message.user.name 
+            %p.upper-info__date
+              = message.created_at.strftime("%Y/%m/%d %H:%M")
+          %p.message_text 
+            = message.content
+    = form_for [@group, @message] do |f|
+      .bottom-content
+        .bottom-content__form
+          = f.text_field :content, class: "message-box__left-1", placeholder: 'type a message'
+          .form__mask
+            = f.label :image, class: 'form__mask' do
+              = fa_icon 'picture-o', class: 'fa fa_image'
+              = f.file_field :image, class: 'hidden' 
+        .message-box__right
+          = f.submit 'Send', class:"send_class"

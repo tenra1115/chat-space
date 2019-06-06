@@ -1,0 +1,21 @@
+.wrapper
+  .left-content
+    .top-content
+      %p.user-name 
+        = link_to current_user.name
+      %ul.user-menu
+        %li.edit-user
+          = link_to "/groups/new" do
+            = fa_icon "edit" 
+        %li.new-group
+          = link_to "/users/:id/edit" do
+            =fa_icon "cog" 
+    .middle-content
+      -# = link_to "" do
+      .group
+        - current_user.groups.each do |group|
+          = link_to group_messages_path(group) do
+            %p.group-name 
+              = group.name
+            %p.latest-message 
+              = group.show_last_content
