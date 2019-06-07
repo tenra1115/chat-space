@@ -51,8 +51,6 @@ $(function(){
     .done(function(data){
       var html = buildHTML(data);
         $('.middle-right-content').append(html);
-        // console.log($('.middle-right-content')[0].scrollHeight)
-        // console.log($('.middle-left-content').height())
 
         // 画面に表示される最初の位置
         $('.middle-right-content').animate({scrollTop: $('.middle-right-content')[0].scrollHeight}, 100);
