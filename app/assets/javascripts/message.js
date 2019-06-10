@@ -19,7 +19,7 @@ $(function(){
                         <p class="message_text">
                           ${content}
                         </p>
-                      <img src= ${image}>
+                        ${image}
                     </div>
                     `
     return html;
