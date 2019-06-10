@@ -10,8 +10,7 @@
         %li.new-group
           = link_to "/users/:id/edit" do
             =fa_icon "cog" 
-    .middle-content
-      -# = link_to "" do
+    .middle-left-content
       .group
         - current_user.groups.each do |group|
           = link_to group_messages_path(group) do
