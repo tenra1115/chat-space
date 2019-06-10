@@ -1,30 +1,34 @@
 class GroupsController < ApplicationController
 
+  before_action :set_group, only:[:edit, :update]
+
+
   def index
   end
 
   def new
     @group = Group.new
-    @group.users << current_user
   end
-
+  
   def create
     @group = Group.new(create_params)
+    # グループと作成したユーザーを紐づける
+    @group.users << current_user
     if @group.save
       redirect_to "/", notice: 'グループが作成されました'
     else
       render :new
     end
+    
 
   end
 
   def edit
-    @group = Group.new
+      @user = @group.users
   end
 
   def update
-    @group = Post.find_by(params[:id])
-    @group.update(title: params[:title])
+    @group = @group.update(create_params)
     redirect_to "/"
   end
 
@@ -35,7 +39,7 @@ class GroupsController < ApplicationController
   end
 
   def set_group
-    @group = Group.find(params[:id])
+    @group = Group.find_by(params[:id])
   end
 
 

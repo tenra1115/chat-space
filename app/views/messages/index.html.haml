@@ -8,7 +8,7 @@
           = link_to "/groups/new" do
             = fa_icon "edit" 
         %li.new-group
-          = link_to "/users/:id/edit" do
+          = link_to "/users/#{current_user.id}/edit" do
             =fa_icon "cog" 
     .middle-left-content
       .group
@@ -30,7 +30,7 @@
             - @messe.each do |user|
               = user.name
 
-      = link_to "/groups/:id/edit" do
+      = link_to "edit_group_path" do
         .edit-btn Edit
     .middle-right-content  
       - @messages.each do |message|
@@ -43,7 +43,7 @@
           %p.message_text 
             = message.content
           %p.message_image
-            = image_tag message.image.to_s
+            = image_tag message.image
     = form_for [@group, @message] do |f|
       .bottom-content
         .bottom-content__form

@@ -9,19 +9,17 @@ $(function(){
     var html = `
                     <div class="message" id="message_id">
                       <div class="upper-info">
-                      <p class="upper-info__user">
-                        ${message.name}
-                      </p>
-                      <p class="upper-info__date">
-                        ${message.created_at}
-                      </p>
-                    </div>
-                    <p class="message_text">
-                      ${message.content}
-                    </p>
-                    <p class="message_image">
-                      ${message.image}
-                    </p>
+                        <p class="upper-info__user">
+                          ${message.name}
+                        </p>
+                        <p class="upper-info__date">
+                          ${message.created_at}
+                        </p>
+                      </div>
+                        <p class="message_text">
+                          ${content}
+                        </p>
+                        ${image}
                     </div>
                     `
     return html;
