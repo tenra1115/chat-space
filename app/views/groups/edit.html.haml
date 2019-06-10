@@ -1,6 +1,5 @@
 .chat-group-form
   %h1 チャットグループ編集
-  -# %form_for#edit_chat_group_22.edit_chat_group{assept_charset: "UTF-8", action: "/chat_groups/22", method: "post"}
   = form_for @group do |f|
     - if @group.errors.any?
       .chat-group-form__errors
@@ -9,32 +8,28 @@
     .chat-group-form__field.clearfix
       .chat-group-form__field--left
         = f.label'グループ名', class: "chat-group-form__label"
-        -# %label.chat-group-form__label{for: "chat_group_name"} グループ名
       .chat-group-form__field--right
-        = f.text_field :name, class: "chat-group-form__input", placeholder: "グループ名を入力してください"
-        -# %input{id: "chat_group_name", class: "chat-group-form__input", type: "text", name: "chat_group_name", placeholder: "okay", value: "グループ名を入力してください"}
+        = f.text_field :name, class: "chat-group-form__input"
     .chat-group-form__field.clearfix
-    -#   <!-- この部分はインクリメンタルサーチ（ユーザー追加の非同期化のときに使用します  -->
-    -#   <!-- <div class='chat-group-form__field--left'>
-    -#     <label class="chat-group-form__label" for="chat_group_チャットメンバーを追加">チャットメンバーを追加</label>
-    -#   </div>
-    -#   <div class='chat-group-form__field--right'>
-    -#     <div class='chat-group-form__search clearfix'>
-    -#       <input class='chat-group-form__input' id='user-search-field' placeholder='追加したいユーザー名を入力してください' type='text'>
-    -#     </div>
-    -#     <div id='user-search-result'></div>
-    -#   </div> -->
-    -# </div>
+      .chat-group-form__field--left
+        = f.label'チャットメンバーを追加', class: "chat-group-form__label"
+      .chat-group-form__field--right
+        .chat-group-form__search.clearfix
+          %input#user-search-field.chat-group-form__input{placeholder: "追加したいユーザー名を入力してください"}
+        #user-search-result
     .chat-group-form__field.clearfix
       .chat-group-form__field--left
         = f.label 'チャットメンバー', class: "chat-group-form__label"
-        -# %label.chat-group-form__label{for: "chat_group_チャットメンバー"} チャットメンバー
+      .chat-group-form__field--right               
+        - @user.each do |user|
+          #chat-group-users
+            #chat-group-user-22.chat-group-user.clearfix
+              = f.hidden_field :user_ids, multiple: true, value: user.id
+              %p.chat-group-user__name 
+                = user.name
+              - if user.name != current_user.name
+                %a.user-search-remove.chat-group-user__btn.chat-group-user__btn--remove.js-remove-btn 削除
     .chat-group-form__field.clearfix
       .chat-group-form__field--left
       .chat-group-form__field--right
-        -# <!-- グループ作成機能の追加時はここにcollection_check_boxesの記述を入れてください  -->
-        .check_box
-          = f.collection_check_boxes(:user_ids, User.all, :id, :name) do |b|
-            = b.label{ b.check_box + b.text}
-
-        -# %input{type: "submit", name: "commit", value: "Save", class: "chat-group-form__action-btn", data_disable_with: "Save"}
+        = f.submit class: 'chat-group-form__action-btn'
