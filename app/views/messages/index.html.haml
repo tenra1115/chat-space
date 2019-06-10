@@ -30,7 +30,7 @@
             - @messe.each do |user|
               = user.name
 
-      = link_to "/groups/#{@group.id}/edit" do
+      = link_to "edit_group_path" do
         .edit-btn Edit
     .middle-right-content  
       - @messages.each do |message|
