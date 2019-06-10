@@ -24,14 +24,11 @@ class GroupsController < ApplicationController
   end
 
   def edit
-      @group = Group.find(params[:id])
       @user = @group.users
   end
 
   def update
-    @group = Group.find(params[:id])
     @group = @group.update(create_params)
-    # @group.users << 
     redirect_to "/"
   end
 
