@@ -1,29 +1,30 @@
 $(function(){
- 
-
+  
   $(document).on('turbolinks:load', function(){
   // 値を取ってきたものを出力するところのHTML
-  function buildHTML(message){
-    var content = message.content ? `${ message.content }` : "";
-    var image = message.image ? `<img src= ${ message.image }>` : "";
-    var html = `
-                    <div class="message" id="message_id">
-                      <div class="upper-info">
-                        <p class="upper-info__user">
-                          ${message.name}
-                        </p>
-                        <p class="upper-info__date">
-                          ${message.created_at}
-                        </p>
+    function buildHTML(message){
+      var content = message.content ? `${ message.content }` : "";
+      var image = message.image ? `<img src= ${ message.image }>` : "";
+      var html = `
+                      <div class="message" id="message_id">
+                        <div class="upper-info">
+                          <p class="upper-info__user">
+                            ${message.name}
+                          </p>
+                          <p class="upper-info__date">
+                            ${message.created_at}
+                          </p>
+                        </div>
+                          <p class="message_text">
+                            ${content}
+                          </p>
+                          ${image}
                       </div>
-                        <p class="message_text">
-                          ${content}
-                        </p>
-                        ${image}
-                    </div>
-                    `
-    return html;
-  }
+                      `
+      return html;
+    }
+
+  
 
   // メッセージが送信された時の動き
   $('#new_message').on('submit', function(e){
@@ -36,6 +37,8 @@ $(function(){
     $('#send_class').removeAttr('data-disable-with');
     // 入力された値をからにする
     $('#message_content').val('')
+
+    
     
     $.ajax({
       url: url,
@@ -51,7 +54,7 @@ $(function(){
         $('.middle-right-content').append(html);
 
         // 画面に表示される最初の位置
-        $('.middle-right-content').animate({scrollTop: $('.middle-right-content')[0].scrollHeight}, 100);
+        $('.middle-right-content').animate({scrollTop: $('.middle-right-content')[0].scrollHeight}, 10);
       
       return false
 
@@ -60,7 +63,6 @@ $(function(){
     .fail(function(){
       alert('error');
     })
-    
-  })
+  });
 })
 })
