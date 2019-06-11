@@ -1,6 +1,6 @@
 $(function(){
   
-  $(document).on('turbolinks:load', function(){
+  
   // 値を取ってきたものを出力するところのHTML
     function buildHTML(message){
       var content = message.content ? `${ message.content }` : "";
@@ -64,5 +64,31 @@ $(function(){
       alert('error');
     })
   });
-})
+  var reloadMessages = function() {
+      
+    //カスタムデータ属性を利用し、ブラウザに表示されている最新メッセージのidを取得
+    last_message_id = $('.message:last').data("message-id");
+    $.ajax({
+      //ルーティングで設定した通りのURLを指定
+      url: "api/messages",
+      //ルーティングで設定した通りhttpメソッドをgetに指定
+      type: 'get',
+      dataType: 'json',
+      //dataオプションでリクエストに値を含める
+      data: {last_id: last_message_id}
+    })
+    .done(function(messages) {
+      var insertHTML = '';
+      messages.forEach(function(message) {
+        insertHTML = buildHTML(message)
+        $('.middle-right-content').append(insertHTML)
+      })
+    })
+    .fail(function() {
+      alert('自動更新に失敗しました');
+    }) 
+  }
+  // 5秒ごとに値を取ってくる処理
+  setInterval(reloadMessages, 5000);
+  reloadMessages()
 })
