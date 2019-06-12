@@ -21,7 +21,6 @@ $(function() {
     var user_id = $(this).data("user-id");
     var name = $(this).data("user-name");
     var html = `
-                <div id="chat-group-users">
                   <div class="chat-group-user clearfix" id="chat-group-user-22">
                     <input name="group[user_ids][]" type="hidden" value=${user_id}>
                       <p class="chat-group-user__name">${name}</p>
