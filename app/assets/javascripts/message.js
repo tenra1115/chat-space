@@ -1,12 +1,10 @@
 $(function(){
-  
-  
   // 値を取ってきたものを出力するところのHTML
     function buildHTML(message){
       var content = message.content ? `${ message.content }` : "";
       var image = message.image ? `<img src= ${ message.image }>` : "";
       var html = `
-                      <div class="message" id="message_id">
+                      <div class="message" id="message_id" data-message-id='${message.id}'>
                         <div class="upper-info">
                           <p class="upper-info__user">
                             ${message.name}
@@ -23,9 +21,6 @@ $(function(){
                       `
       return html;
     }
-
-  
-
   // メッセージが送信された時の動き
   $('#new_message').on('submit', function(e){
     e.preventDefault();
@@ -38,8 +33,6 @@ $(function(){
     // 入力された値をからにする
     $('#message_content').val('')
 
-    
-    
     $.ajax({
       url: url,
       type: "POST",
@@ -68,6 +61,7 @@ $(function(){
       
     //カスタムデータ属性を利用し、ブラウザに表示されている最新メッセージのidを取得
     last_message_id = $('.message:last').data("message-id");
+    console.log(last_message_id)
     $.ajax({
       //ルーティングで設定した通りのURLを指定
       url: "api/messages",
@@ -77,6 +71,7 @@ $(function(){
       //dataオプションでリクエストに値を含める
       data: {last_id: last_message_id}
     })
+    // 中身をmessagesに入れている
     .done(function(messages) {
       var insertHTML = '';
       messages.forEach(function(message) {
