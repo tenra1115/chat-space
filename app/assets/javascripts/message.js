@@ -32,6 +32,7 @@ $(function(){
     $('#send_class').removeAttr('data-disable-with');
     // 入力された値をからにする
     $('#message_content').val('')
+   
 
     $.ajax({
       url: url,
@@ -48,41 +49,52 @@ $(function(){
 
         // 画面に表示される最初の位置
         $('.middle-right-content').animate({scrollTop: $('.middle-right-content')[0].scrollHeight}, 10);
-      
-      return false
-
-    })
-    // エラー時の処理
-    .fail(function(){
-      alert('error');
-    })
-  });
-  var reloadMessages = function() {
-      
-    //カスタムデータ属性を利用し、ブラウザに表示されている最新メッセージのidを取得
-    last_message_id = $('.message:last').data("message-id");
-    $.ajax({
-      //ルーティングで設定した通りのURLを指定
-      url: "api/messages",
-      //ルーティングで設定した通りhttpメソッドをgetに指定
-      type: 'get',
-      dataType: 'json',
-      //dataオプションでリクエストに値を含める
-      data: {last_id: last_message_id}
-    })
-    // 中身をmessagesに入れている
-    .done(function(messages) {
-      var insertHTML = '';
-      messages.forEach(function(message) {
-        insertHTML = buildHTML(message)
-        $('.middle-right-content').append(insertHTML)
+        // 写真の値をからにする処理
+        $('#message_image').val("");
+        return false
+        
       })
-    })
-    .fail(function() {
-      alert('自動更新に失敗しました');
-    }) 
+      // エラー時の処理
+      .fail(function(){
+        alert('error');
+      })
+  });
+
+
+  var reloadMessages = function() {
+    // 現在のURLを取得
+    var str = location.pathname;
+    // /groups/:group_id/messagesを表している
+    var best = /\/groups\/\d{0,}\/messages/;
+    // 現在のUrlが正規表現した場合この処理を行ってくれという処理
+    if(result = str.match(best)){
+      //カスタムデータ属性を利用し、ブラウザに表示されている最新メッセージのidを取得
+      last_message_id = $('.message:last').data("message-id");
+        $.ajax({
+          //ルーティングで設定した通りのURLを指定
+          url: "api/messages",
+          //ルーティングで設定した通りhttpメソッドをgetに指定
+          type: 'get',
+          dataType: 'json',
+          //dataオプションでリクエストに値を含める
+          data: {last_id: last_message_id}
+        })
+    // 中身をmessagesに入れている
+      .done(function(messages) {
+        var insertHTML = '';
+        messages.forEach(function(message) {
+          insertHTML = buildHTML(message)
+          $('.middle-right-content').append(insertHTML)
+        })
+      })
+      .fail(function() {
+        alert('自動更新に失敗しました');
+      }) 
+    } else {
+      return;
+    }
   }
   // 5秒ごとに値を取ってくる処理
   setInterval(reloadMessages, 5000);
-  reloadMessages()
+      
 })
