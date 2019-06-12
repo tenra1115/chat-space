@@ -30,11 +30,11 @@
             - @messe.each do |user|
               = user.name
 
-      = link_to "edit_group_path" do
-        .edit-btn Edit
-    .middle-right-content  
+      = link_to edit_group_path(@group) do
+        .edit-btn Edit  
+    .middle-right-content
       - @messages.each do |message|
-        #message_id.message
+        #message_id.message{"data-message-id": "#{message.id}"}
           .upper-info
             %p.upper-info__user 
               = message.user.name 
