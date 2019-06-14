@@ -1,4 +1,5 @@
 $(function(){
+  
   // 値を取ってきたものを出力するところのHTML
     function buildHTML(message){
       var content = message.content ? `${ message.content }` : "";
@@ -32,6 +33,7 @@ $(function(){
     $('#send_class').removeAttr('data-disable-with');
     // 入力された値をからにする
     $('#message_content').val('')
+    
    
 
     $.ajax({
@@ -85,6 +87,7 @@ $(function(){
         messages.forEach(function(message) {
           insertHTML = buildHTML(message)
           $('.middle-right-content').append(insertHTML)
+          $('.middle-right-content').animate({scrollTop: $('.middle-right-content')[0].scrollHeight}, 10);
         })
       })
       .fail(function() {
