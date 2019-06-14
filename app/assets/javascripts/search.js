@@ -1,14 +1,16 @@
 $(function() {
+
   var search_list = $("#user-search-result");
   var second_list = $("#chat-group-users");
   function appendUser(user) {
     // 取ってきた値を出力するところの位置
+    
     $('p').data('name', 'user_id')
     var html = `<div class="chat-group-user clearfix">
                   <p class="chat-group-user__name">${user.name}</p>
                   <div class="user-search-add chat-group-user__btn chat-group-user__btn--add" data-user-id=${user.id} data-user-name=${user.name}>追加</div>
                 </div>`
-    search_list.append(html);      
+    search_list.append(html);
   }
   function appendErrMsgToHTML(msg) {
     var html = `<div class="chat-group-user clearfix">
@@ -32,9 +34,13 @@ $(function() {
     // 追加ボタンが押された後の処理
     $("#user-search-result").empty();
     $().parents().remove();
+
   });
   // ボタンがクリックされた時
   $("#user-search-field").on("keyup", function() {
+    if (event.code == 'Backspace' || event.code == 'Delete'|| event.code == 'Tab'){
+      return false;
+    }
     var input = $("#user-search-field").val();
     $.ajax({
       type: 'GET',
