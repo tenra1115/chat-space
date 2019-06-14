@@ -38,10 +38,11 @@ $(function() {
   });
   // ボタンがクリックされた時
   $("#user-search-field").on("keyup", function() {
-    if (event.code == 'Backspace' || event.code == 'Delete'|| event.code == 'Tab'){
-      return false;
-    }
+    console.log(event.code)
     var input = $("#user-search-field").val();
+      if (event.code == "Backspace" || event.code == "Space"){
+        $("#user-search-result").remove();
+      }
     $.ajax({
       type: 'GET',
       // 処理を行って欲しいコードがあるURL
@@ -52,7 +53,7 @@ $(function() {
     //  doneとfailはAjax通信の時のみ
     .done(function(users) {
       $("#user-search-result").empty();
-      if (users.length !== 0) {
+      if (users.length !== 0 || input.length !== 0 || input !== null) {
         users.forEach(function(user){
           appendUser(user);
         });
