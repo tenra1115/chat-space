@@ -33,7 +33,7 @@ $(function(){
     $('#send_class').removeAttr('data-disable-with');
     // 入力された値をからにする
     $('#message_content').val('')
-    
+    $('#message_image').val('');
    
 
     $.ajax({
