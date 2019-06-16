@@ -38,33 +38,37 @@ $(function() {
   });
   // ボタンがクリックされた時
   $("#user-search-field").on("keyup", function() {
-    console.log(event.code)
-    var input = $("#user-search-field").val();
-      if (event.code == "Backspace" || event.code == "Space"){
-        $("#user-search-result").remove();
-      }
-    $.ajax({
-      type: 'GET',
-      // 処理を行って欲しいコードがあるURL
-      url: '/users',
-      data: { keyword: input },
-      dataType: 'json'
-    })
-    //  doneとfailはAjax通信の時のみ
-    .done(function(users) {
+    if (event.code == "Backspace" || event.code == "Space"){
       $("#user-search-result").empty();
-      if (users.length !== 0 || input.length !== 0 || input !== null) {
-        users.forEach(function(user){
-          appendUser(user);
-        });
-      }
-      else {
-        appendErrMsgToHTML("一致するユーザーが見つかりません");
+      return false;
     }
-    })
-    .fail(function() {
-      alert('ユーザー検索に失敗しました');
-    })
+    // if (input.length == 0){}
+      
+      var input = $("#user-search-field").val();
+      $.ajax({
+        type: 'GET',
+        // 処理を行って欲しいコードがあるURL
+        url: '/users',
+        data: { keyword: input },
+        dataType: 'json'
+      })
+      //  doneとfailはAjax通信の時のみ
+      .done(function(users) {
+        console.log(users)
+        $("#user-search-result").empty();
+        if (users.length !== 0) {
+          users.forEach(function(user){
+            appendUser(user);
+          });
+        }
+        else {
+          appendErrMsgToHTML("一致するユーザーが見つかりません");
+        }
+      })
+      .fail(function() {
+        alert('ユーザー検索に失敗しました');
+      })
+    
   })
   // 削除ボタンが押された時の処理
   $(document).on('click', ".user-search-remove", function() {
